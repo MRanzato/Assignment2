@@ -7,5 +7,3 @@ cache:
     - $HOME/.m2
 script:
   - mvn clean install 
-after_success:
-  - mvn -DrepoToken=$TOKEN jacoco:report coveralls:report
