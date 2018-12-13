@@ -41,5 +41,30 @@ public class BellaNapoliTest {
         assertEquals(0, napoli.getOrderPrice(new ArrayList<MenuItem>()),0);
     }
 
-    
+    @Test(expected = RestaurantBillException.class)
+    public void testMoreThan20Items() throws RestaurantBillException{
+        List<MenuItem> lista = new ArrayList<>();
+
+        lista.addAll(Arrays.asList(food2,food2,food2,food2,food2,food2,food2,food2,
+                food2,food2,food2,food2,food2,food2,food2,food2,food2,
+                food2,food2,food2,food2,food2));
+        napoli.getOrderPrice(lista);
+    }
+
+    @Test
+    public void testDiscountOver100Euros() throws RestaurantBillException{
+        List<MenuItem> lista = new ArrayList<>();
+
+        lista.addAll(Arrays.asList(food10,food3));
+        assertEquals(97.85,napoli.getOrderPrice(lista),0.001);
+    }
+
+    @Test
+    public void testOrderedMoreThan10Pizzas() throws RestaurantBillException {
+        List<MenuItem> lista = new ArrayList<>();
+
+        lista.addAll(Arrays.asList(food2,food2,food2,food2,food2,food2,food2,food2,
+                food2,food2,food2,food2));
+        assertEquals(60.50, napoli.getOrderPrice(lista),0);
+    }
 }
